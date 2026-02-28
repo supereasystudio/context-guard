@@ -1,1 +1,24 @@
-.vercel
+# .gitignore for OpenClaw Workspace
+
+# Logs and runtime data
+*.log
+.openclaw/logs/
+.openclaw/cache/
+
+# Sensitive local config (DO NOT BACKUP)
+# We will exclude the main config if it contains active session tokens
+# .openclaw/openclaw.json
+
+# Python environment
+__pycache__/
+.venv/
+venv/
+.pytest_cache/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Media/Assets (screenshots are okay, but larger binaries should be ignored)
+# *.png
+# *.jpg
