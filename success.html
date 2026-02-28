@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download | Context Guard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap');
+        
+        :root {
+            --accent-gradient: linear-gradient(135deg, #2DD4BF 0%, #22D3EE 50%, #4ADE80 100%);
+            --bg: #000000;
+            --card-bg: #0a0a0a;
+            --border: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #ffffff;
+        }
+
+        .mono { font-family: 'JetBrains+Mono', monospace; }
+
+        .magic-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2px;
+            overflow: hidden;
+            max-width: 600px;
+            margin: 100px auto;
+        }
+
+        .magic-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0%,
+                #2DD4BF 25%,
+                #4ADE80 50%,
+                #2DD4BF 75%,
+                transparent 100%
+            );
+            animation: rotate-border 4s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            100% { transform: rotate(360deg); }
+        }
+
+        .magic-card-inner {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 3rem;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .download-btn {
+            background: var(--accent-gradient);
+            color: black;
+            font-weight: 800;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 2rem;
+            transition: transform 0.2s ease;
+        }
+
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="magic-card">
+        <div class="magic-card-inner">
+            <div class="text-4xl mb-4">💎</div>
+            <h1 class="text-3xl font-black mb-4 tracking-tighter">ACCESS UNLOCKED</h1>
+            <p class="text-zinc-400 mb-8">Thank you for your purchase. Your AI sessions are about to get 40% cheaper.</p>
+            
+            <div class="bg-zinc-900/50 rounded-xl p-6 mb-8 text-left border border-zinc-800">
+                <div class="text-xs font-bold text-zinc-500 uppercase mb-2 tracking-widest">Your Private Access</div>
+                <div class="mono text-sm text-blue-400 break-all">
+                    curl -sSL https://context-guard-six.vercel.app/install.sh | bash
+                </div>
+            </div>
+
+            <a href="https://context-guard-six.vercel.app/context_guard.py" download class="download-btn uppercase tracking-widest text-sm">
+                Download Source (.py)
+            </a>
+            
+            <div class="mt-8 text-xs text-zinc-600 uppercase tracking-widest">
+                ◈ Designed by Human // Delivered by Tank
+            </div>
+        </div>
+    </div>
+</body>
+</html>

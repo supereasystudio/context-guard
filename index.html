@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Context Guard | AI Token Optimization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono&display=swap');
+        
+        :root {
+            --accent-start: #2DD4BF; /* Teal */
+            --accent-mid: #22D3EE;   /* Light Blue */
+            --accent-end: #4ADE80;   /* Green */
+            --accent-gradient: linear-gradient(135deg, #2DD4BF 0%, #22D3EE 50%, #4ADE80 100%);
+            --bg: #000000;
+            --card-bg: #0a0a0a;
+            --border: #1a1a1a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: #ffffff;
+        }
+
+        .mono { font-family: 'JetBrains+Mono', monospace; }
+
+        /* Magic UI Pulsing Glow Button */
+        .magic-button {
+            position: relative;
+            z-index: 10;
+            background: var(--accent-gradient);
+            color: black;
+            font-weight: 800;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 0 0 0px rgba(45, 212, 191, 0.4);
+            animation: pulse-glow 3s infinite;
+        }
+
+        .magic-button:hover {
+            transform: scale(1.05) translateY(-2px);
+            box-shadow: 0 0 40px rgba(45, 212, 191, 0.6);
+            filter: brightness(1.1);
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0px rgba(45, 212, 191, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(45, 212, 191, 0); }
+            100% { box-shadow: 0 0 0 0px rgba(45, 212, 191, 0); }
+        }
+
+        /* Rainbow Border Effect for Cards */
+        .magic-card {
+            position: relative;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2px;
+            overflow: hidden;
+        }
+
+        .magic-card::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent 0%,
+                var(--accent-start) 25%,
+                var(--accent-end) 50%,
+                var(--accent-start) 75%,
+                transparent 100%
+            );
+            animation: rotate-border 4s linear infinite;
+        }
+
+        @keyframes rotate-border {
+            100% { transform: rotate(360deg); }
+        }
+
+        .magic-card-inner {
+            background: var(--card-bg);
+            border-radius: 14px;
+            height: 100%;
+            width: 100%;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .glow-text {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(45, 212, 191, 0.3));
+        }
+
+        .input-blur {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .input-blur:focus {
+            border-color: var(--accent-start);
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.1);
+            outline: none;
+        }
+
+        .retro-grid {
+            background-image: linear-gradient(to right, #111 1px, transparent 1px),
+                              linear-gradient(to bottom, #111 1px, transparent 1px);
+            background-size: 40px 40px;
+            mask-image: radial-gradient(ellipse at center, black, transparent 80%);
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+
+    <div class="fixed inset-0 retro-grid pointer-events-none opacity-20"></div>
+
+    <!-- Nav -->
+    <nav class="relative z-10 max-w-6xl mx-auto p-8 flex justify-between items-center">
+        <div class="text-xl font-bold tracking-tight flex items-center gap-2">
+            <span class="text-[#2DD4BF]">◈</span>
+            CONTEXT GUARD
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-medium text-zinc-400 uppercase tracking-widest">
+            <a href="#how" class="hover:text-white transition">Approach</a>
+            <a href="#audit" class="hover:text-white transition">Scanner</a>
+            <a href="https://buy.stripe.com/5kQaEZ8REdvB4L15OLc3m00" class="text-white hover:text-[#2DD4BF] transition italic font-bold">Full Access</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <main class="relative z-10 max-w-5xl mx-auto px-6 pt-32 pb-20 text-center">
+        <div class="inline-block px-4 py-1.5 mb-6 text-xs font-semibold tracking-widest uppercase bg-[#2DD4BF]/10 text-[#2DD4BF] rounded-full border border-[#2DD4BF]/20">
+            Automated Context Optimization
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-8 leading-[1.1]">
+            AI agents are expensive.<br>
+            <span class="glow-text">We make them magic.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-12 font-light">
+            Stop wasting 40% of your context window on junk data. Context Guard audits your codebase and generates high-efficiency LLM prompts.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a href="#audit" class="magic-button px-12 py-5 rounded-2xl font-bold text-xl uppercase tracking-tighter">Start Free Scan</a>
+            <a href="https://buy.stripe.com/5kQaEZ8REdvB4L15OLc3m00" class="px-10 py-5 rounded-2xl border border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 transition font-bold text-lg">Instant Cleanup</a>
+        </div>
+    </main>
+
+    <!-- Interactive Section -->
+    <section id="audit" class="relative z-10 max-w-4xl mx-auto px-6 pt-24 pb-12">
+        <div class="magic-card">
+            <div class="magic-card-inner">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-[#2DD4BF]/10 rounded-full blur-3xl -mr-32 -mt-32"></div>
+                
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="w-2 h-2 rounded-full bg-[#2DD4BF] animate-pulse"></div>
+                    <h2 class="text-sm font-bold tracking-[0.2em] uppercase text-zinc-500">Live Token Preview</h2>
+                </div>
+
+                <textarea id="token-input" 
+                    class="w-full h-56 input-blur rounded-2xl p-6 mb-8 mono text-sm resize-none" 
+                    placeholder="Paste code or logs to analyze context health..."></textarea>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+                    <div class="space-y-1">
+                        <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Tokens</div>
+                        <div id="token-count" class="text-2xl font-semibold mono">0</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Est. Cost</div>
+                        <div id="claude-cost" class="text-2xl font-semibold mono text-[#2DD4BF]">$0.00</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Bloat</div>
+                        <div id="savings" class="text-2xl font-semibold mono text-zinc-600">0%</div>
+                    </div>
+                    <div class="space-y-1">
+                        <div class="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Health</div>
+                        <div class="text-xl font-semibold text-green-500 uppercase tracking-tighter">Optimal</div>
+                    </div>
+                </div>
+
+                <a href="https://buy.stripe.com/5kQaEZ8REdvB4L15OLc3m00" class="magic-button w-full block text-center py-6 rounded-2xl font-black uppercase tracking-widest text-sm">
+                    Automate My Cleanup Plan ($5)
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how" class="relative z-10 max-w-5xl mx-auto px-6 py-24 border-t border-zinc-900">
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-16 text-center">The Approach</h2>
+        <div class="grid md:grid-cols-3 gap-12 text-center">
+            <div class="space-y-4">
+                <div class="text-[#2DD4BF] mono text-xs font-bold tracking-[0.3em]">01_SCAN</div>
+                <h3 class="text-xl font-bold uppercase tracking-tighter">Deep Recursive Audit</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Our engine scans your folder structure, bypassing binary noise and identifying the high-token outliers that drain your credit balance.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="text-[#2DD4BF] mono text-xs font-bold tracking-[0.3em]">02_DETECT</div>
+                <h3 class="text-xl font-bold uppercase tracking-tighter">Bloat Visualization</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Instantly visualize which files are consuming 80% of your LLM context window. Stop sending useless lockfiles to your agent.</p>
+            </div>
+            <div class="space-y-4">
+                <div class="text-[#2DD4BF] mono text-xs font-bold tracking-[0.3em]">03_OPTIMIZE</div>
+                <h3 class="text-xl font-bold uppercase tracking-tighter">Automated Ignore</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">The Full Plan generates a custom .contextignore file that integrates with Claude Code, Cursor, and OpenClaw for maximum efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-20 border-t border-zinc-900 text-center">
+        <div class="text-zinc-500 text-xs tracking-widest uppercase mb-4">Powered by OpenClaw // Designed by David // Delivered by Tank</div>
+        <div class="text-zinc-700 text-[10px]">© 2026 CONTEXT_GUARD LABS</div>
+    </footer>
+
+    <script>
+        const textarea = document.getElementById('token-input');
+        const tokenCountEl = document.getElementById('token-count');
+        const claudeCostEl = document.getElementById('claude-cost');
+        const savingsEl = document.getElementById('savings');
+
+        textarea.addEventListener('input', () => {
+            const text = textarea.value;
+            // Rough approximation: 1 token ~= 4 chars (demo logic)
+            const count = text.length > 0 ? Math.ceil(text.length / 4) : 0;
+            const cost = (count / 1000000) * 15;
+            
+            tokenCountEl.innerText = count.toLocaleString();
+            claudeCostEl.innerText = '$' + cost.toFixed(4);
+            
+            if(count > 500) {
+                savingsEl.innerText = '38%';
+                savingsEl.classList.remove('text-zinc-600');
+                savingsEl.classList.add('text-[#2DD4BF]');
+            } else {
+                savingsEl.innerText = '0%';
+                savingsEl.classList.add('text-zinc-600');
+                savingsEl.classList.remove('text-[#2DD4BF]');
+            }
+        });
+    </script>
+</body>
+</html>
